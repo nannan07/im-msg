@@ -1,0 +1,37 @@
+spring: 
+  profiles: 
+    active: dev
+############Spring相关
+  # JavaMailSender 邮件发送的配置
+  mail: 
+      protocol: smtp
+      host: smtp.exmail.qq.com
+      port: 25
+      username: #lirui@allmsi.com
+      fromMail:
+        addr: #lirui@allmsi.com
+      password: 08043037Vae
+      properties:
+        mail:
+          smtp:
+            auth: true
+          starttls:
+            enable: true
+            required: true
+############Mybatis相关   
+mybatis:
+  typeAliasesPackage:  com.allmsi.msg.model.po
+  
+#发送消息线程池线程数
+sendThreadPool.num: 8  
+#mq线程池线程数
+mqThreadPool.MinNum: 10 
+
+###########消息队列相关
+apache.rocketmq:
+  #消息队列消费者 
+  consumer.PushConsumer: PushConsumer
+  #消息对列生产者
+  producer.producerGroup: Producer
+  #注册消息路由
+  namesrvAddr: 172.31.69.143:9876

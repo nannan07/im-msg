@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allmsi.msg.log.dao.LoginLogMapper">
+	<resultMap id="BaseResultMap" type="com.allmsi.msg.model.po.LoginLogPO">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="userId" property="userId" jdbcType="VARCHAR" />
+		<result column="token" property="token" jdbcType="VARCHAR" />
+		<result column="loginName" property="loginName" jdbcType="VARCHAR" />
+		<result column="userName" property="userName" jdbcType="VARCHAR" />
+		<result column="loginTime" property="loginTime" jdbcType="VARCHAR" />
+		<result column="deptId" property="deptId" jdbcType="VARCHAR" />
+		<result column="deptName" property="deptName" jdbcType="VARCHAR" />
+		<result column="cTime" property="cTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, userId,token, loginName, userName, loginTime, deptId, deptName, cTime
+	</sql>
+
+	<insert id="insertSelective"
+		parameterType="com.allmsi.msg.model.po.LoginLogPO">
+		insert into im_tn_log_login
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="userId != null">
+				userId,
+			</if>
+			<if test="token != null">
+				token,
+			</if>
+			<if test="loginName != null">
+				loginName,
+			</if>
+			<if test="userName != null">
+				userName,
+			</if>
+
+			<if test="deptId != null">
+				deptId,
+			</if>
+			<if test="deptName != null">
+				deptName,
+			</if>
+			loginTime,cTime
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="token != null">
+				#{token,jdbcType=VARCHAR},
+			</if>
+			<if test="loginName != null">
+				#{loginName,jdbcType=VARCHAR},
+			</if>
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="deptId != null">
+				#{deptId,jdbcType=VARCHAR},
+			</if>
+			<if test="deptName != null">
+				#{deptName,jdbcType=VARCHAR},
+			</if>
+			now(),now()
+		</trim>
+	</insert>
+
+
+</mapper>

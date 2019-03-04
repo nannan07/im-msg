@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allmsi.msg.log.dao.HttpLogMapper">
+	<resultMap id="BaseResultMap" type="com.allmsi.msg.model.po.HttpLogPO">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="className" property="className" jdbcType="VARCHAR" />
+		<result column="methodName" property="methodName" jdbcType="VARCHAR" />
+		<result column="uri" property="uri" jdbcType="VARCHAR" />
+		<result column="clientIp" property="clientIp" jdbcType="VARCHAR" />
+		<result column="token" property="userId" jdbcType="VARCHAR" />
+		<result column="reqMethod" property="reqMethod" jdbcType="VARCHAR" />
+		<result column="browserType" property="browserType" jdbcType="VARCHAR" />
+		<result column="browVersion" property="browVersion" jdbcType="VARCHAR" />
+		<result column="param" property="param" jdbcType="VARCHAR" />
+		<result column="paramNum" property="paramNum" jdbcType="VARCHAR" />
+		<result column="cTime" property="cTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, className, methodName, uri, clientIp, token, reqMethod, browserType,
+		browVersion, param, paramNum, cTime
+	</sql>
+	
+	<insert id="insertSelective"
+		parameterType="com.allmsi.msg.model.po.HttpLogPO">
+		insert into im_tn_log_http
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="className != null">
+				className,
+			</if>
+			<if test="methodName != null">
+				methodName,
+			</if>
+			<if test="uri != null">
+				uri,
+			</if>
+			<if test="clientIp != null">
+				clientIp,
+			</if>
+			<if test="token != null">
+				token,
+			</if>
+			<if test="reqMethod != null">
+				reqMethod,
+			</if>
+			<if test="browserType != null">
+				browserType,
+			</if>
+			<if test="browVersion != null">
+				browVersion,
+			</if>
+			<if test="param != null">
+				param,
+			</if>
+			<if test="paramNum != null">
+				paramNum,
+			</if>
+				cTime
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="className != null">
+				#{className,jdbcType=VARCHAR},
+			</if>
+			<if test="methodName != null">
+				#{methodName,jdbcType=VARCHAR},
+			</if>
+			<if test="uri != null">
+				#{uri,jdbcType=VARCHAR},
+			</if>
+			<if test="clientIp != null">
+				#{clientIp,jdbcType=VARCHAR},
+			</if>
+			<if test="token != null">
+				#{token,jdbcType=VARCHAR},
+			</if>
+			<if test="reqMethod != null">
+				#{reqMethod,jdbcType=VARCHAR},
+			</if>
+			<if test="browserType != null">
+				#{browserType,jdbcType=VARCHAR},
+			</if>
+			<if test="browVersion != null">
+				#{browVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="param != null">
+				#{param,jdbcType=VARCHAR},
+			</if>
+			<if test="paramNum != null">
+				#{paramNum,jdbcType=VARCHAR},
+			</if>
+			now()
+		</trim>
+	</insert>
+</mapper>

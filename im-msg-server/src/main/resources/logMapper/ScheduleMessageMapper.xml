@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allmsi.msg.log.dao.ScheduleMessageMapper">
+	<resultMap id="BaseResultMap" type="com.allmsi.msg.model.po.ScheduleMessagePO">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="sysFlag" property="sysFlag" jdbcType="VARCHAR" />
+		<result column="msgFrom" property="msgFrom" jdbcType="VARCHAR" />
+		<result column="subject" property="subject" jdbcType="VARCHAR" />
+		<result column="cTime" property="cTime" jdbcType="TIMESTAMP" />
+		<result column="uTime" property="uTime" jdbcType="TIMESTAMP" />
+		<result column="del" property="del" jdbcType="INTEGER" />
+		<result column="msgTo" property="msgTo" jdbcType="VARCHAR" />
+		<result column="msgType" property="msgType" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="ResultMapWithBLOBs" type="com.allmsi.msg.model.po.ScheduleMessagePO" extends="BaseResultMap">
+		<result column="contentText" property="contentText" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	
+	<select id="selectForTimedTask" resultMap="BaseResultMap" parameterType="java.lang.String">
+		SELECT m.id, m.sysFlag, m.msgFrom, m.subject, t.msgTo, t.msgType
+		FROM im_tn_transmission_msg_to t
+		RIGHT JOIN im_tn_transmission m ON t.transId = m.id AND m.del = 0
+		WHERE t.del = 0 AND t.msgType != 'system' AND t.flag &lt; 98
+		<if test="_parameter != null">
+		    AND t.flag &gt; ${_parameter}  
+		</if>
+		AND t.cTime &gt; NOW() - interval 24 hour
+	</select>
+	
+	<select id="listMsgTo" resultMap="BaseResultMap">
+	    select t.id,t.sysFlag,t.msgFrom,t.subject,tm.msgTo,tm.msgType,tm.contentText
+        from im_tn_transmission_msg_to tm
+        INNER join im_tn_transmission t ON t.id=tm.transId AND t.del=0
+        where tm.flag=0 AND tm.del=0 AND tm.cTime >= NOW() - interval 24 hour
+	</select>
+</mapper>

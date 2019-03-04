@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allmsi.msg.log.dao.DBLogMapper" >
+  <resultMap id="BaseResultMap" type="com.allmsi.msg.model.po.DBLogPO" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="className" property="className" jdbcType="VARCHAR" />
+    <result column="methodName" property="methodName" jdbcType="VARCHAR" />
+    <result column="parameter" property="parameter" jdbcType="VARCHAR" />
+    <result column="paramNum" property="paramNum" jdbcType="VARCHAR" />
+    <result column="exSql" property="exSql" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="costTime" property="costTime" jdbcType="VARCHAR" />
+    <result column="cTime" property="cTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, className, methodName, parameter, paramNum, exSql,status,costTime, cTime
+  </sql>
+ 
+  <insert id="insertSelective" parameterType="com.allmsi.msg.model.po.DBLogPO" >
+    insert into im_tn_log_db
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="className != null" >
+        className,
+      </if>
+      <if test="methodName != null" >
+        methodName,
+      </if>
+      <if test="parameter != null" >
+        parameter,
+      </if>
+      <if test="paramNum != null" >
+        paramNum,
+      </if>
+      <if test="exSql != null" >
+        exSql,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="costTime != null" >
+        costTime,
+      </if>
+      cTime,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="className != null" >
+        #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="methodName != null" >
+        #{methodName,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter != null" >
+        #{parameter,jdbcType=VARCHAR},
+      </if>
+      <if test="paramNum != null" >
+        #{paramNum,jdbcType=VARCHAR},
+      </if>
+      <if test="exSql != null" >
+        #{exSql,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="costTime != null" >
+        #{costTime,jdbcType=VARCHAR},
+      </if>
+     now()
+    </trim>
+  </insert>
+</mapper>

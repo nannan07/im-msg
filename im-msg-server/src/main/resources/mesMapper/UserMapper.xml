@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allmsi.msg.mes.dao.UserMapper">
+	<resultMap id="BaseResultMap" type="com.allmsi.msg.model.po.UserPO">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="loginName" property="loginName" jdbcType="VARCHAR" />
+		<result column="userName" property="userName" jdbcType="VARCHAR" />
+		<result column="pwd" property="password" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="sex" property="sex" jdbcType="INTEGER" />
+		<result column="sort" property="sort" jdbcType="INTEGER" />
+		<result column="cUserId" property="cUserId" jdbcType="VARCHAR" />
+		<result column="uUserId" property="uUserId" jdbcType="VARCHAR" />
+		<result column="cTime" property="cTime" jdbcType="TIMESTAMP" />
+		<result column="uTime" property="uTime" jdbcType="TIMESTAMP" />
+		<result column="del" property="del" jdbcType="INTEGER" />
+		<result column="dingUserId" property="dingUserId" jdbcType="VARCHAR" />
+		<result column="orgEmail" property="orgEmail" jdbcType="VARCHAR" />
+		<result column="roleId" property="roleId" jdbcType="VARCHAR" />
+		<result column="roleName" property="roleName" jdbcType="VARCHAR" />
+		<result column="deptId" property="deptId" jdbcType="VARCHAR" />
+		<result column="deptName" property="deptName" jdbcType="VARCHAR" />
+		<result column="udType" property="udType" jdbcType="VARCHAR" />
+		<result column="systemId" property="systemId" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, userName, pwd, phone, email, sex, sort,
+		cUserId,uUserId,cTime, uTime, del
+	</sql>
+	<sql id="Simple_Column_List">
+		u.id,u.loginName, u.userName, u.phone, u.email, u.sex,
+		u.sort, u.cTime
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select id, userName, phone, email, sex, sort, cTime
+		from im_ta_user
+		where del = 0 and id = #{id,jdbcType=VARCHAR}
+	</select>
+</mapper>

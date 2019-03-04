@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allmsi.msg.mes.dao.SystemMsgMapper">
+	<resultMap id="BaseResultMap" type="com.allmsi.msg.model.po.SystemMsgPO">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="transId" property="transId" jdbcType="VARCHAR" />
+		<result column="objId" property="objId" jdbcType="VARCHAR" />
+		<result column="templateType" property="templateType" jdbcType="VARCHAR" />
+		<result column="msgType" property="msgType" jdbcType="VARCHAR" />
+		<result column="sysFlag" property="sysFlag" jdbcType="VARCHAR" />
+		<result column="subject" property="subject" jdbcType="VARCHAR" />
+		<result column="msgFrom" property="msgFrom" jdbcType="VARCHAR" />
+		<result column="msgTo" property="msgTo" jdbcType="VARCHAR" />
+		<result column="contentText" property="contentText" jdbcType="VARCHAR" />
+		<result column="url" property="url" jdbcType="VARCHAR" />
+		<result column="isRead" property="isRead" jdbcType="TINYINT" />
+		<result column="cTime" property="cTime" jdbcType="TIMESTAMP" />
+		<result column="uTime" property="uTime" jdbcType="TIMESTAMP" />
+		<result column="del" property="del" jdbcType="TINYINT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, transId, objId, templateType, msgType, sysFlag, subject, msgFrom,
+		msgTo, contentText,
+		url, isRead, cTime, uTime, del
+	</sql>
+
+	<insert id="insertSelective" parameterType="com.allmsi.msg.model.po.SystemMsgPO">
+		insert into im_tm_message
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="transId != null">
+				transId,
+			</if>
+			<if test="objId != null">
+				objId,
+			</if>
+			<if test="templateType != null">
+				templateType,
+			</if>
+			<if test="msgType != null">
+				msgType,
+			</if>
+			<if test="sysFlag != null">
+				sysFlag,
+			</if>
+			<if test="subject != null">
+				subject,
+			</if>
+			<if test="msgFrom != null">
+				msgFrom,
+			</if>
+			<if test="msgTo != null">
+				msgTo,
+			</if>
+			<if test="contentText != null">
+				contentText,
+			</if>
+			<if test="url != null">
+				url,
+			</if>
+			isRead,cTime,del
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="transId != null">
+				#{transId,jdbcType=VARCHAR},
+			</if>
+			<if test="objId != null">
+				#{objId,jdbcType=VARCHAR},
+			</if>
+			<if test="templateType != null">
+				#{templateType,jdbcType=VARCHAR},
+			</if>
+			<if test="msgType != null">
+				#{msgType,jdbcType=VARCHAR},
+			</if>
+			<if test="sysFlag != null">
+				#{sysFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="subject != null">
+				#{subject,jdbcType=VARCHAR},
+			</if>
+			<if test="msgFrom != null">
+				#{msgFrom,jdbcType=VARCHAR},
+			</if>
+			<if test="msgTo != null">
+				#{msgTo,jdbcType=VARCHAR},
+			</if>
+			<if test="contentText != null">
+				#{contentText,jdbcType=VARCHAR},
+			</if>
+			<if test="url != null">
+				#{url,jdbcType=VARCHAR},
+			</if>
+			0,now(),0
+		</trim>
+	</insert>
+</mapper>
